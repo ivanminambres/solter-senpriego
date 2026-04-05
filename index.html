@@ -11,623 +11,95 @@
     --rose-light: #f9b8cb;
     --rose-pale: #fde8ef;
     --gold: #d4a843;
-    --gold-light: #f5e6c0;
     --cream: #fffaf5;
     --dark: #2a1520;
     --purple: #9b5d8a;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Lato', sans-serif;
-    background: var(--cream);
-    color: var(--dark);
-    overflow-x: hidden;
-    min-height: 100vh;
-  }
-
-  /* GLITTER CANVAS */
-  #glitter-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* FLOATING HEARTS BG */
-  .floating-hearts {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .fheart {
-    position: absolute;
-    bottom: -60px;
-    font-size: 1.5rem;
-    opacity: 0;
-    animation: floatUp linear infinite;
-  }
-
+  body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; min-height: 100vh; }
+  #glitter-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  .floating-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .fheart { position: absolute; bottom: -60px; opacity: 0; animation: floatUp linear infinite; }
   @keyframes floatUp {
     0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
-    10% { opacity: 0.6; }
-    90% { opacity: 0.3; }
+    10% { opacity: 0.6; } 90% { opacity: 0.3; }
     100% { transform: translateY(-110vh) rotate(720deg) scale(0.5); opacity: 0; }
   }
-
-  /* HEADER */
-  header {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    padding: 3rem 1rem 2rem;
-    background: linear-gradient(180deg, #ffe0ec 0%, var(--cream) 100%);
-  }
-
-  .crown {
-    font-size: 2.5rem;
-    display: block;
-    animation: bounce 2s ease-in-out infinite;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-
-  header h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    color: var(--rose);
-    text-shadow: 2px 2px 0 var(--rose-light), 4px 4px 20px rgba(232,82,122,0.2);
-    line-height: 1.1;
-    margin: 0.5rem 0;
-  }
-
-  header p {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    color: var(--purple);
-    font-size: 1.1rem;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
-  }
-
-  .hearts-divider {
-    color: var(--rose);
-    font-size: 1.3rem;
-    letter-spacing: 0.5rem;
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-
-  /* NAV TABS */
-  .tabs {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: linear-gradient(0deg, var(--cream), transparent);
-  }
-
-  .tab-btn {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    padding: 0.6rem 1.5rem;
-    border: 2px solid var(--rose-light);
-    border-radius: 50px;
-    background: white;
-    color: var(--rose);
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 700;
-  }
-  .tab-btn.active, .tab-btn:hover {
-    background: var(--rose);
-    color: white;
-    border-color: var(--rose);
-    box-shadow: 0 4px 20px rgba(232,82,122,0.35);
-    transform: translateY(-2px);
-  }
-
-  /* MAIN CONTENT */
-  .content {
-    position: relative;
-    z-index: 10;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 1rem 1.5rem 4rem;
-  }
-
-  /* ───── FORM SECTION ───── */
-  .form-card {
-    background: white;
-    border-radius: 24px;
-    padding: 2.5rem;
-    box-shadow: 0 8px 40px rgba(232,82,122,0.12), 0 2px 8px rgba(0,0,0,0.06);
-    border: 1.5px solid var(--rose-pale);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .form-card::before {
-    content: '💖';
-    position: absolute;
-    top: -20px; right: -20px;
-    font-size: 8rem;
-    opacity: 0.05;
-    transform: rotate(15deg);
-  }
-
-  .form-card h2 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2rem;
-    color: var(--rose);
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-  }
-
-  @media (max-width: 600px) {
-    .form-grid { grid-template-columns: 1fr; }
-    .form-card { padding: 1.5rem; }
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
+  header { position: relative; z-index: 10; text-align: center; padding: 3rem 1rem 2rem; background: linear-gradient(180deg, #ffe0ec 0%, var(--cream) 100%); }
+  .crown { font-size: 2.5rem; display: block; animation: bounce 2s ease-in-out infinite; }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  header h1 { font-family: 'Dancing Script', cursive; font-size: clamp(2.5rem, 8vw, 4.5rem); color: var(--rose); text-shadow: 2px 2px 0 var(--rose-light), 4px 4px 20px rgba(232,82,122,0.2); line-height: 1.1; margin: 0.5rem 0; }
+  header p { font-family: 'Playfair Display', serif; font-style: italic; color: var(--purple); font-size: 1.1rem; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .hearts-divider { color: var(--rose); font-size: 1.3rem; letter-spacing: 0.5rem; animation: pulse 1.5s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+  .tabs { position: relative; z-index: 10; display: flex; justify-content: center; gap: 0.5rem; padding: 1rem; background: linear-gradient(0deg, var(--cream), transparent); }
+  .tab-btn { font-family: 'Playfair Display', serif; font-size: 0.95rem; padding: 0.6rem 1.5rem; border: 2px solid var(--rose-light); border-radius: 50px; background: white; color: var(--rose); cursor: pointer; transition: all 0.3s; font-weight: 700; }
+  .tab-btn.active, .tab-btn:hover { background: var(--rose); color: white; border-color: var(--rose); box-shadow: 0 4px 20px rgba(232,82,122,0.35); transform: translateY(-2px); }
+  .content { position: relative; z-index: 10; max-width: 960px; margin: 0 auto; padding: 1rem 1.5rem 4rem; }
+  .form-card { background: white; border-radius: 24px; padding: 2.5rem; box-shadow: 0 8px 40px rgba(232,82,122,0.12), 0 2px 8px rgba(0,0,0,0.06); border: 1.5px solid var(--rose-pale); position: relative; overflow: hidden; }
+  .form-card::before { content: '💖'; position: absolute; top: -20px; right: -20px; font-size: 8rem; opacity: 0.05; transform: rotate(15deg); }
+  .form-card h2 { font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--rose); text-align: center; margin-bottom: 2rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .form-card { padding: 1.5rem; } }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
   .form-group.full { grid-column: 1 / -1; }
-
-  label {
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--purple);
-  }
-
-  input[type="text"],
-  input[type="number"],
-  input[type="file"] {
-    border: 2px solid var(--rose-light);
-    border-radius: 12px;
-    padding: 0.75rem 1rem;
-    font-family: 'Lato', sans-serif;
-    font-size: 1rem;
-    color: var(--dark);
-    background: var(--rose-pale);
-    transition: border-color 0.2s, box-shadow 0.2s;
-    outline: none;
-    width: 100%;
-  }
-
-  input:focus {
-    border-color: var(--rose);
-    box-shadow: 0 0 0 3px rgba(232,82,122,0.15);
-    background: white;
-  }
-
-  /* PHOTO UPLOAD */
-  .photo-upload {
-    border: 3px dashed var(--rose-light);
-    border-radius: 16px;
-    padding: 2rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s;
-    background: var(--rose-pale);
-    position: relative;
-  }
-
+  label { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple); }
+  input[type="text"], input[type="number"], input[type="file"] { border: 2px solid var(--rose-light); border-radius: 12px; padding: 0.75rem 1rem; font-family: 'Lato', sans-serif; font-size: 1rem; color: var(--dark); background: var(--rose-pale); transition: border-color 0.2s, box-shadow 0.2s; outline: none; width: 100%; }
+  input:focus { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(232,82,122,0.15); background: white; }
+  .photo-upload { border: 3px dashed var(--rose-light); border-radius: 16px; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s; background: var(--rose-pale); }
   .photo-upload:hover { border-color: var(--rose); background: #fef0f5; }
-
-  .photo-preview {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--rose);
-    display: none;
-    margin: 0 auto 0.5rem;
-    box-shadow: 0 4px 20px rgba(232,82,122,0.3);
-  }
-
+  .photo-preview { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--rose); display: none; margin: 0 auto 0.5rem; box-shadow: 0 4px 20px rgba(232,82,122,0.3); }
   .photo-upload-text { color: var(--rose); font-size: 0.9rem; }
   .photo-upload-icon { font-size: 3rem; display: block; }
-
-  /* INTEREST SELECTOR */
-  .interest-group {
-    display: flex;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-  }
-
-  .interest-btn {
-    flex: 1;
-    min-width: 80px;
-    padding: 0.7rem 1rem;
-    border: 2px solid var(--rose-light);
-    border-radius: 50px;
-    background: white;
-    cursor: pointer;
-    text-align: center;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #999;
-    transition: all 0.2s;
-    user-select: none;
-  }
-
-  .interest-btn.selected {
-    background: linear-gradient(135deg, var(--rose), var(--purple));
-    color: white;
-    border-color: transparent;
-    box-shadow: 0 4px 15px rgba(232,82,122,0.4);
-    transform: scale(1.04);
-  }
-
-  /* WORDS INPUTS */
-  .words-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0.8rem;
-  }
-
-  .word-input-wrap {
-    position: relative;
-  }
-
-  .word-input-wrap::before {
-    content: attr(data-num);
-    position: absolute;
-    top: 50%;
-    left: 0.8rem;
-    transform: translateY(-50%);
-    color: var(--rose);
-    font-weight: 700;
-    font-size: 0.8rem;
-    pointer-events: none;
-  }
-
-  .word-input-wrap input {
-    padding-left: 1.8rem;
-  }
-
-  /* SUBMIT BTN */
-  .btn-submit {
-    width: 100%;
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, var(--rose), #c73669, var(--purple));
-    background-size: 200% 200%;
-    animation: gradientShift 3s ease infinite;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-top: 1rem;
-    box-shadow: 0 6px 30px rgba(232,82,122,0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-submit:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 40px rgba(232,82,122,0.5);
-  }
-
-  .btn-submit:active { transform: translateY(0); }
-
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* ───── PROFILES GRID ───── */
-  .filter-bar {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-    justify-content: center;
-  }
-
-  .filter-chip {
-    padding: 0.4rem 1.1rem;
-    border: 2px solid var(--rose-light);
-    border-radius: 50px;
-    background: white;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--rose);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .filter-chip.active, .filter-chip:hover {
-    background: var(--rose);
-    color: white;
-    border-color: var(--rose);
-  }
-
-  .profiles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .profile-card {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 4px 25px rgba(232,82,122,0.1);
-    border: 1.5px solid var(--rose-pale);
-    transition: transform 0.25s, box-shadow 0.25s;
-    cursor: pointer;
-    animation: cardIn 0.4s ease both;
-  }
-
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(20px) scale(0.96); }
-    to { opacity: 1; transform: none; }
-  }
-
-  .profile-card:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 12px 40px rgba(232,82,122,0.2);
-  }
-
-  .profile-photo-wrap {
-    position: relative;
-    height: 200px;
-    background: linear-gradient(135deg, var(--rose-pale), #f5e6f0);
-    overflow: hidden;
-  }
-
-  .profile-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .profile-photo-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 5rem;
-  }
-
-  .profile-interest-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(255,255,255,0.9);
-    border-radius: 50px;
-    padding: 0.3rem 0.6rem;
-    font-size: 1.2rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-
-  .profile-body {
-    padding: 1.2rem;
-  }
-
-  .profile-name {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.6rem;
-    color: var(--rose);
-    line-height: 1;
-  }
-
-  .profile-age {
-    font-size: 0.85rem;
-    color: #999;
-    margin-bottom: 0.7rem;
-  }
-
-  .profile-words {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 1rem;
-  }
-
-  .word-tag {
-    background: var(--rose-pale);
-    color: var(--purple);
-    border-radius: 50px;
-    padding: 0.25rem 0.7rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-  }
-
-  .btn-contact {
-    width: 100%;
-    padding: 0.65rem;
-    background: linear-gradient(135deg, var(--rose), var(--purple));
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .btn-contact:hover {
-    box-shadow: 0 4px 15px rgba(232,82,122,0.4);
-    transform: scale(1.02);
-  }
-
-  /* EMPTY STATE */
-  .empty-state {
-    text-align: center;
-    padding: 4rem 1rem;
-    color: #ccc;
-    grid-column: 1 / -1;
-  }
-
+  .interest-group { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .interest-btn { flex: 1; min-width: 80px; padding: 0.7rem 1rem; border: 2px solid var(--rose-light); border-radius: 50px; background: white; cursor: pointer; text-align: center; font-size: 0.9rem; font-weight: 700; color: #999; transition: all 0.2s; user-select: none; }
+  .interest-btn.selected { background: linear-gradient(135deg, var(--rose), var(--purple)); color: white; border-color: transparent; box-shadow: 0 4px 15px rgba(232,82,122,0.4); transform: scale(1.04); }
+  .words-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; }
+  .word-input-wrap { position: relative; }
+  .word-input-wrap::before { content: attr(data-num); position: absolute; top: 50%; left: 0.8rem; transform: translateY(-50%); color: var(--rose); font-weight: 700; font-size: 0.8rem; pointer-events: none; }
+  .word-input-wrap input { padding-left: 1.8rem; }
+  .btn-submit { width: 100%; padding: 1rem 2rem; background: linear-gradient(135deg, var(--rose), #c73669, var(--purple)); background-size: 200% 200%; animation: gradientShift 3s ease infinite; color: white; border: none; border-radius: 50px; font-family: 'Dancing Script', cursive; font-size: 1.5rem; cursor: pointer; margin-top: 1rem; box-shadow: 0 6px 30px rgba(232,82,122,0.4); transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(232,82,122,0.5); }
+  .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+  @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+  .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; justify-content: center; }
+  .filter-chip { padding: 0.4rem 1.1rem; border: 2px solid var(--rose-light); border-radius: 50px; background: white; font-size: 0.85rem; font-weight: 700; color: var(--rose); cursor: pointer; transition: all 0.2s; }
+  .filter-chip.active, .filter-chip:hover { background: var(--rose); color: white; border-color: var(--rose); }
+  .profiles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+  .profile-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 25px rgba(232,82,122,0.1); border: 1.5px solid var(--rose-pale); transition: transform 0.25s, box-shadow 0.25s; cursor: pointer; animation: cardIn 0.4s ease both; }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: none; } }
+  .profile-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 12px 40px rgba(232,82,122,0.2); }
+  .profile-photo-wrap { position: relative; height: 200px; background: linear-gradient(135deg, var(--rose-pale), #f5e6f0); overflow: hidden; }
+  .profile-photo { width: 100%; height: 100%; object-fit: cover; }
+  .profile-photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 5rem; }
+  .profile-interest-badge { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); border-radius: 50px; padding: 0.3rem 0.6rem; font-size: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .profile-body { padding: 1.2rem; }
+  .profile-name { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--rose); line-height: 1; }
+  .profile-age { font-size: 0.85rem; color: #999; margin-bottom: 0.7rem; }
+  .profile-words { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+  .word-tag { background: var(--rose-pale); color: var(--purple); border-radius: 50px; padding: 0.25rem 0.7rem; font-size: 0.78rem; font-weight: 700; }
+  .btn-contact { width: 100%; padding: 0.65rem; background: linear-gradient(135deg, var(--rose), var(--purple)); color: white; border: none; border-radius: 50px; font-family: 'Dancing Script', cursive; font-size: 1.1rem; cursor: pointer; transition: all 0.2s; }
+  .btn-contact:hover { box-shadow: 0 4px 15px rgba(232,82,122,0.4); transform: scale(1.02); }
+  .empty-state { text-align: center; padding: 4rem 1rem; color: #ccc; grid-column: 1 / -1; }
   .empty-state .empty-icon { font-size: 4rem; display: block; margin-bottom: 1rem; }
   .empty-state p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; }
-
-  /* MODAL */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(42,21,32,0.7);
-    backdrop-filter: blur(4px);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-  }
-
-  .modal-overlay.open {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .modal {
-    background: white;
-    border-radius: 24px;
-    padding: 2rem;
-    max-width: 380px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    transform: scale(0.9);
-    transition: transform 0.3s;
-    position: relative;
-  }
-
+  .modal-overlay { position: fixed; inset: 0; background: rgba(42,21,32,0.7); backdrop-filter: blur(4px); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal { background: white; border-radius: 24px; padding: 2rem; max-width: 380px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3); transform: scale(0.9); transition: transform 0.3s; position: relative; }
   .modal-overlay.open .modal { transform: scale(1); }
-
-  .modal-photo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--rose);
-    margin: 0 auto 1rem;
-    display: block;
-  }
-
-  .modal-photo-placeholder {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: var(--rose-pale);
-    border: 4px solid var(--rose);
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-  }
-
-  .modal h3 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2rem;
-    color: var(--rose);
-  }
-
-  .modal .modal-age {
-    color: #aaa;
-    margin-bottom: 0.8rem;
-  }
-
+  .modal-photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--rose); margin: 0 auto 1rem; display: block; }
+  .modal-photo-placeholder { width: 100px; height: 100px; border-radius: 50%; background: var(--rose-pale); border: 4px solid var(--rose); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+  .modal h3 { font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--rose); }
+  .modal .modal-age { color: #aaa; margin-bottom: 0.8rem; }
   .modal .modal-words { margin-bottom: 1.2rem; }
-
-  .modal-phone {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--rose-pale);
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    color: var(--purple);
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    margin-bottom: 1rem;
-  }
-
+  .modal-phone { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--rose-pale); padding: 0.8rem 1.5rem; border-radius: 50px; color: var(--purple); font-weight: 700; font-size: 1.1rem; text-decoration: none; margin-bottom: 1rem; }
   .modal-phone:hover { background: var(--rose); color: white; }
-
-  .modal-close {
-    position: absolute;
-    top: 1rem; right: 1rem;
-    background: var(--rose-pale);
-    border: none;
-    border-radius: 50%;
-    width: 36px; height: 36px;
-    font-size: 1rem;
-    cursor: pointer;
-    color: var(--rose);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-  }
+  .modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--rose-pale); border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1rem; cursor: pointer; color: var(--rose); display: flex; align-items: center; justify-content: center; }
   .modal-close:hover { background: var(--rose); color: white; }
-
-  /* SUCCESS TOAST */
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: linear-gradient(135deg, var(--rose), var(--purple));
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.3rem;
-    box-shadow: 0 8px 30px rgba(232,82,122,0.4);
-    z-index: 200;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    white-space: nowrap;
-  }
-
+  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: linear-gradient(135deg, var(--rose), var(--purple)); color: white; padding: 1rem 2rem; border-radius: 50px; font-family: 'Dancing Script', cursive; font-size: 1.3rem; box-shadow: 0 8px 30px rgba(232,82,122,0.4); z-index: 200; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); white-space: nowrap; }
   .toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* SECTION HIDDEN */
   .section { display: none; }
   .section.active { display: block; }
-
-  /* INTEREST ICONS MAP */
-  .interest-icon-chicos::after { content: ' 👦'; }
-  .interest-icon-chicas::after { content: ' 👧'; }
-  .interest-icon-ambos::after { content: ' 💞'; }
 </style>
 </head>
 <body>
@@ -648,14 +120,11 @@
 </nav>
 
 <main class="content">
-
   <!-- REGISTRO -->
   <section id="registrarse" class="section active">
     <div class="form-card">
       <h2>✨ Cuéntanos sobre ti ✨</h2>
       <div class="form-grid">
-
-        <!-- FOTO -->
         <div class="form-group full">
           <label>📸 Tu foto</label>
           <div class="photo-upload" id="photoUpload" onclick="document.getElementById('photoInput').click()">
@@ -665,42 +134,26 @@
           </div>
           <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="previewPhoto(event)">
         </div>
-
-        <!-- NOMBRE -->
         <div class="form-group">
           <label>👤 Nombre</label>
           <input type="text" id="nombre" placeholder="Tu nombre" maxlength="30">
         </div>
-
-        <!-- EDAD -->
         <div class="form-group">
           <label>🎂 Edad</label>
           <input type="number" id="edad" placeholder="Tu edad" min="18" max="99">
         </div>
-
-        <!-- INSTAGRAM -->
         <div class="form-group full">
           <label>📸 Tu Instagram</label>
           <input type="text" id="instagram" placeholder="@tu_usuario" maxlength="40">
         </div>
-
-        <!-- 3 PALABRAS -->
         <div class="form-group full">
           <label>💬 Descríbete en 3 palabras</label>
           <div class="words-row">
-            <div class="word-input-wrap" data-num="1️⃣">
-              <input type="text" id="word1" placeholder="Divertida" maxlength="15">
-            </div>
-            <div class="word-input-wrap" data-num="2️⃣">
-              <input type="text" id="word2" placeholder="Aventurera" maxlength="15">
-            </div>
-            <div class="word-input-wrap" data-num="3️⃣">
-              <input type="text" id="word3" placeholder="Sincera" maxlength="15">
-            </div>
+            <div class="word-input-wrap" data-num="1️⃣"><input type="text" id="word1" placeholder="Divertida" maxlength="15"></div>
+            <div class="word-input-wrap" data-num="2️⃣"><input type="text" id="word2" placeholder="Aventurera" maxlength="15"></div>
+            <div class="word-input-wrap" data-num="3️⃣"><input type="text" id="word3" placeholder="Sincera" maxlength="15"></div>
           </div>
         </div>
-
-        <!-- INTERÉS -->
         <div class="form-group full">
           <label>💘 Me interesan...</label>
           <div class="interest-group" id="interestGroup">
@@ -709,14 +162,9 @@
             <div class="interest-btn" data-val="todos" onclick="toggleInterest(this)">💞 Todos</div>
           </div>
         </div>
-
-        <!-- BOTÓN -->
         <div class="form-group full">
-          <button class="btn-submit" onclick="registerProfile()">
-            💖 ¡Que empiece el amor! 💖
-          </button>
+          <button class="btn-submit" onclick="registerProfile()">💖 ¡Que empiece el amor! 💖</button>
         </div>
-
       </div>
     </div>
   </section>
@@ -729,13 +177,9 @@
       <div class="filter-chip" data-filter="chicas" onclick="applyFilter(this)">👧 Chicas</div>
     </div>
     <div class="profiles-grid" id="profilesGrid">
-      <div class="empty-state">
-        <span class="empty-icon">💔</span>
-        <p>Aún no hay perfiles... ¡Sé el primero!</p>
-      </div>
+      <div class="empty-state"><span class="empty-icon">💔</span><p>Aún no hay perfiles... ¡Sé el primero!</p></div>
     </div>
   </section>
-
 </main>
 
 <!-- MODAL -->
@@ -747,11 +191,38 @@
 </div>
 
 <!-- TOAST -->
-<div class="toast" id="toast">💖 ¡Perfil añadido con éxito!</div>
+<div class="toast" id="toast">💖 ¡Perfil añadido!</div>
 
 <script>
-// ─── DATA ───
-let profiles = JSON.parse(localStorage.getItem('wedding_profiles') || '[]');
+// ─── SUPABASE ───
+const SUPABASE_URL = 'https://axftkelltczkpjfmyyfp.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_7QhdnXRKIvE9JbAAjaRRTg_I7B-f0Md';
+
+async function sbGet() {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/profiles?order=created_at.desc&select=*`, {
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function sbInsert(data) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation'
+    },
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+// ─── STATE ───
+let profiles = [];
 let selectedInterest = [];
 let currentFilter = 'todos';
 let photoData = null;
@@ -770,67 +241,27 @@ for (let i = 0; i < 18; i++) {
   fhearts.appendChild(h);
 }
 
-// ─── GLITTER CANVAS ───
+// ─── GLITTER ───
 const canvas = document.getElementById('glitter-canvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
-
 function createParticle(x, y) {
   const colors = ['#e8527a','#d4a843','#9b5d8a','#f9b8cb','#f5e6c0','#ffffff'];
-  return {
-    x, y,
-    vx: (Math.random() - 0.5) * 3,
-    vy: (Math.random() - 0.5) * 3 - 1,
-    size: Math.random() * 4 + 1,
-    color: colors[Math.floor(Math.random() * colors.length)],
-    life: 1,
-    decay: 0.02 + Math.random() * 0.02,
-    shape: Math.random() > 0.5 ? 'circle' : 'rect',
-    rotation: Math.random() * Math.PI * 2
-  };
+  return { x, y, vx: (Math.random()-0.5)*3, vy: (Math.random()-0.5)*3-1, size: Math.random()*4+1, color: colors[Math.floor(Math.random()*colors.length)], life: 1, decay: 0.02+Math.random()*0.02, shape: Math.random()>0.5?'circle':'rect', rotation: Math.random()*Math.PI*2 };
 }
-
-// Auto-spawn glitter
-setInterval(() => {
-  const x = Math.random() * window.innerWidth;
-  const y = Math.random() * window.innerHeight * 0.3;
-  for (let i = 0; i < 3; i++) particles.push(createParticle(x, y));
-}, 300);
-
-document.addEventListener('mousemove', (e) => {
-  if (Math.random() > 0.7) {
-    for (let i = 0; i < 4; i++) particles.push(createParticle(e.clientX, e.clientY));
-  }
-});
-
+setInterval(() => { const x = Math.random()*window.innerWidth; const y = Math.random()*window.innerHeight*0.3; for(let i=0;i<3;i++) particles.push(createParticle(x,y)); }, 300);
+document.addEventListener('mousemove', (e) => { if(Math.random()>0.7) for(let i=0;i<4;i++) particles.push(createParticle(e.clientX,e.clientY)); });
 function animateGlitter() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles = particles.filter(p => p.life > 0);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles = particles.filter(p=>p.life>0);
   particles.forEach(p => {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += 0.05;
-    p.life -= p.decay;
-    p.rotation += 0.1;
-    ctx.save();
-    ctx.globalAlpha = p.life;
-    ctx.fillStyle = p.color;
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rotation);
-    if (p.shape === 'circle') {
-      ctx.beginPath();
-      ctx.arc(0, 0, p.size, 0, Math.PI * 2);
-      ctx.fill();
-    } else {
-      ctx.fillRect(-p.size, -p.size / 2, p.size * 2, p.size);
-    }
+    p.x+=p.vx; p.y+=p.vy; p.vy+=0.05; p.life-=p.decay; p.rotation+=0.1;
+    ctx.save(); ctx.globalAlpha=p.life; ctx.fillStyle=p.color; ctx.translate(p.x,p.y); ctx.rotate(p.rotation);
+    if(p.shape==='circle'){ctx.beginPath();ctx.arc(0,0,p.size,0,Math.PI*2);ctx.fill();}
+    else{ctx.fillRect(-p.size,-p.size/2,p.size*2,p.size);}
     ctx.restore();
   });
   requestAnimationFrame(animateGlitter);
@@ -839,23 +270,35 @@ animateGlitter();
 
 // ─── TABS ───
 function showTab(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   event.target.classList.add('active');
-  if (id === 'galeria') renderProfiles();
+  if(id==='galeria') loadAndRender();
+}
+
+// ─── LOAD FROM SUPABASE ───
+async function loadAndRender() {
+  const grid = document.getElementById('profilesGrid');
+  grid.innerHTML = `<div class="empty-state"><span class="empty-icon">💫</span><p>Cargando solteros...</p></div>`;
+  try {
+    profiles = await sbGet();
+    renderProfiles();
+  } catch(e) {
+    console.error(e);
+    grid.innerHTML = `<div class="empty-state"><span class="empty-icon">😕</span><p>Error cargando perfiles. Recarga la página.</p></div>`;
+  }
 }
 
 // ─── PHOTO PREVIEW ───
 function previewPhoto(e) {
   const file = e.target.files[0];
-  if (!file) return;
+  if(!file) return;
   const reader = new FileReader();
   reader.onload = (ev) => {
     photoData = ev.target.result;
     const preview = document.getElementById('photoPreview');
-    preview.src = photoData;
-    preview.style.display = 'block';
+    preview.src = photoData; preview.style.display = 'block';
     document.getElementById('uploadIcon').style.display = 'none';
     document.getElementById('uploadText').textContent = '¡Foto lista! 📸';
   };
@@ -866,24 +309,20 @@ function previewPhoto(e) {
 function toggleInterest(btn) {
   btn.classList.toggle('selected');
   const val = btn.dataset.val;
-  if (btn.classList.contains('selected')) {
-    if (val === 'todos') {
+  if(btn.classList.contains('selected')) {
+    if(val==='todos') {
       selectedInterest = ['todos'];
-      document.querySelectorAll('.interest-btn').forEach(b => {
-        b.classList.toggle('selected', b.dataset.val === 'todos');
-      });
+      document.querySelectorAll('.interest-btn').forEach(b=>b.classList.toggle('selected', b.dataset.val==='todos'));
     } else {
-      selectedInterest = selectedInterest.filter(v => v !== 'todos');
+      selectedInterest = selectedInterest.filter(v=>v!=='todos');
       document.querySelector('[data-val="todos"]').classList.remove('selected');
-      if (!selectedInterest.includes(val)) selectedInterest.push(val);
+      if(!selectedInterest.includes(val)) selectedInterest.push(val);
     }
-  } else {
-    selectedInterest = selectedInterest.filter(v => v !== val);
-  }
+  } else { selectedInterest = selectedInterest.filter(v=>v!==val); }
 }
 
 // ─── REGISTER ───
-function registerProfile() {
+async function registerProfile() {
   const nombre = document.getElementById('nombre').value.trim();
   const edad = document.getElementById('edad').value;
   const instagram = document.getElementById('instagram').value.trim();
@@ -891,97 +330,77 @@ function registerProfile() {
   const word2 = document.getElementById('word2').value.trim();
   const word3 = document.getElementById('word3').value.trim();
 
-  if (!nombre) { shake('nombre'); return showToast('💬 Escribe tu nombre', '#c73669'); }
-  if (!edad) { shake('edad'); return showToast('🎂 ¿Cuántos años tienes?', '#c73669'); }
-  if (!instagram) { shake('instagram'); return showToast('📸 Añade tu Instagram', '#c73669'); }
-  if (!word1 || !word2 || !word3) return showToast('💬 ¡3 palabras para describirte!', '#c73669');
-  if (selectedInterest.length === 0) return showToast('💘 ¿Quién te interesa?', '#c73669');
+  if(!nombre) { shake('nombre'); return showToast('💬 Escribe tu nombre','#c73669'); }
+  if(!edad) { shake('edad'); return showToast('🎂 ¿Cuántos años tienes?','#c73669'); }
+  if(!instagram) { shake('instagram'); return showToast('📸 Añade tu Instagram','#c73669'); }
+  if(!word1||!word2||!word3) return showToast('💬 ¡3 palabras para describirte!','#c73669');
+  if(selectedInterest.length===0) return showToast('💘 ¿Quién te interesa?','#c73669');
 
-  const profile = {
-    id: Date.now(),
-    nombre, edad: parseInt(edad), instagram,
-    palabras: [word1, word2, word3],
-    interes: selectedInterest,
-    foto: photoData,
-    timestamp: Date.now()
-  };
+  const btn = document.querySelector('.btn-submit');
+  btn.textContent = '💫 Guardando...'; btn.disabled = true;
 
-  profiles.push(profile);
-  saveProfiles();
-
-  // Reset
-  document.getElementById('nombre').value = '';
-  document.getElementById('edad').value = '';
-  document.getElementById('instagram').value = '';
-  document.getElementById('word1').value = '';
-  document.getElementById('word2').value = '';
-  document.getElementById('word3').value = '';
-  photoData = null;
-  selectedInterest = [];
-  document.querySelectorAll('.interest-btn').forEach(b => b.classList.remove('selected'));
-  document.getElementById('photoPreview').style.display = 'none';
-  document.getElementById('uploadIcon').style.display = 'block';
-  document.getElementById('uploadText').textContent = 'Pulsa para subir tu foto';
-
-  showToast('💖 ¡Perfil añadido! ¡A ligar!');
-  burstGlitter();
-
-  setTimeout(() => {
-    document.querySelectorAll('.tab-btn')[1].click();
-  }, 1200);
+  try {
+    await sbInsert({
+      nombre,
+      edad: parseInt(edad),
+      instagram: instagram.startsWith('@') ? instagram : '@'+instagram,
+      palabras: [word1, word2, word3],
+      interes: selectedInterest,
+      foto: photoData || null
+    });
+    document.getElementById('nombre').value = '';
+    document.getElementById('edad').value = '';
+    document.getElementById('instagram').value = '';
+    document.getElementById('word1').value = '';
+    document.getElementById('word2').value = '';
+    document.getElementById('word3').value = '';
+    photoData = null; selectedInterest = [];
+    document.querySelectorAll('.interest-btn').forEach(b=>b.classList.remove('selected'));
+    document.getElementById('photoPreview').style.display = 'none';
+    document.getElementById('uploadIcon').style.display = 'block';
+    document.getElementById('uploadText').textContent = 'Pulsa para subir tu foto';
+    showToast('💖 ¡Perfil añadido! ¡A ligar!');
+    burstGlitter();
+    setTimeout(() => { document.querySelectorAll('.tab-btn')[1].click(); }, 1200);
+  } catch(e) {
+    console.error(e);
+    showToast('😕 Error al guardar. Inténtalo de nuevo.','#c73669');
+  } finally {
+    btn.textContent = '💖 ¡Que empiece el amor! 💖'; btn.disabled = false;
+  }
 }
 
 function shake(id) {
   const el = document.getElementById(id);
-  el.style.animation = 'none';
-  el.offsetHeight;
+  el.style.animation = 'none'; el.offsetHeight;
   el.style.animation = 'shakeInput 0.4s ease';
-}
-
-function saveProfiles() {
-  try {
-    localStorage.setItem('wedding_profiles', JSON.stringify(profiles));
-  } catch(e) {
-    // Storage full — trim old photos
-    const lite = profiles.map(p => ({...p, foto: p.foto ? 'data:placeholder' : null}));
-    localStorage.setItem('wedding_profiles', JSON.stringify(lite));
-  }
 }
 
 // ─── RENDER PROFILES ───
 function renderProfiles() {
   const grid = document.getElementById('profilesGrid');
   let filtered = currentFilter === 'todos' ? profiles
-    : profiles.filter(p => p.interes.includes(currentFilter) || p.interes.includes('todos'));
+    : profiles.filter(p => {
+        const int = Array.isArray(p.interes) ? p.interes : (p.interes || []);
+        return int.includes(currentFilter) || int.includes('todos');
+      });
 
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div class="empty-state">
-      <span class="empty-icon">💔</span>
-      <p>Aún no hay perfiles... ¡Sé el primero!</p>
-    </div>`;
+  if(filtered.length===0) {
+    grid.innerHTML = `<div class="empty-state"><span class="empty-icon">💔</span><p>Aún no hay perfiles... ¡Sé el primero!</p></div>`;
     return;
   }
 
   grid.innerHTML = filtered.map((p, i) => {
-    const interestIcon = p.interes.includes('todos') ? '💞' :
-      p.interes.includes('chicos') && p.interes.includes('chicas') ? '💞' :
-      p.interes.includes('chicos') ? '👦' : '👧';
-
-    const photoHTML = p.foto && p.foto !== 'data:placeholder'
-      ? `<img class="profile-photo" src="${p.foto}" alt="${p.nombre}">`
-      : `<div class="profile-photo-placeholder">🧑</div>`;
-
-    return `<div class="profile-card" style="animation-delay:${i * 0.07}s" onclick="openModal(${p.id})">
-      <div class="profile-photo-wrap">
-        ${photoHTML}
-        <span class="profile-interest-badge">${interestIcon}</span>
-      </div>
+    const int = Array.isArray(p.interes) ? p.interes : (p.interes || []);
+    const interestIcon = int.includes('todos') ? '💞' : (int.includes('chicos') && int.includes('chicas')) ? '💞' : int.includes('chicos') ? '👦' : '👧';
+    const palabras = Array.isArray(p.palabras) ? p.palabras : (p.palabras || []);
+    const photoHTML = p.foto ? `<img class="profile-photo" src="${p.foto}" alt="${escapeHtml(p.nombre)}">` : `<div class="profile-photo-placeholder">🧑</div>`;
+    return `<div class="profile-card" style="animation-delay:${i*0.07}s" onclick="openModal(${p.id})">
+      <div class="profile-photo-wrap">${photoHTML}<span class="profile-interest-badge">${interestIcon}</span></div>
       <div class="profile-body">
         <div class="profile-name">${escapeHtml(p.nombre)}</div>
         <div class="profile-age">${p.edad} años</div>
-        <div class="profile-words">
-          ${p.palabras.map(w => `<span class="word-tag">${escapeHtml(w)}</span>`).join('')}
-        </div>
+        <div class="profile-words">${palabras.map(w=>`<span class="word-tag">${escapeHtml(w)}</span>`).join('')}</div>
         <button class="btn-contact">💌 Contactar</button>
       </div>
     </div>`;
@@ -989,7 +408,7 @@ function renderProfiles() {
 }
 
 function applyFilter(chip) {
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
   chip.classList.add('active');
   currentFilter = chip.dataset.filter;
   renderProfiles();
@@ -997,63 +416,45 @@ function applyFilter(chip) {
 
 // ─── MODAL ───
 function openModal(id) {
-  const p = profiles.find(pr => pr.id === id);
-  if (!p) return;
-
-  const interestLabel = p.interes.includes('todos') ? '💞 Todos' :
-    p.interes.map(i => i === 'chicos' ? '👦 Chicos' : '👧 Chicas').join(' & ');
-
-  const photoEl = p.foto && p.foto !== 'data:placeholder'
-    ? `<img class="modal-photo" src="${p.foto}" alt="${p.nombre}">`
-    : `<div class="modal-photo-placeholder">🧑</div>`;
-
+  const p = profiles.find(pr=>pr.id===id);
+  if(!p) return;
+  const int = Array.isArray(p.interes) ? p.interes : (p.interes || []);
+  const interestLabel = int.includes('todos') ? '💞 Todos' : int.map(i=>i==='chicos'?'👦 Chicos':'👧 Chicas').join(' & ');
+  const palabras = Array.isArray(p.palabras) ? p.palabras : (p.palabras || []);
+  const photoEl = p.foto ? `<img class="modal-photo" src="${p.foto}" alt="${escapeHtml(p.nombre)}">` : `<div class="modal-photo-placeholder">🧑</div>`;
+  const igHandle = p.instagram.startsWith('@') ? p.instagram : '@'+p.instagram;
   document.getElementById('modalContent').innerHTML = `
     ${photoEl}
     <h3>${escapeHtml(p.nombre)}</h3>
     <div class="modal-age">${p.edad} años · ${interestLabel}</div>
-    <div class="modal-words profile-words" style="justify-content:center">
-      ${p.palabras.map(w => `<span class="word-tag">${escapeHtml(w)}</span>`).join('')}
-    </div>
-    <a href="https://instagram.com/${escapeHtml(p.instagram.replace('@',''))}" target="_blank" class="modal-phone">📸 ${escapeHtml(p.instagram.startsWith('@') ? p.instagram : '@'+p.instagram)}</a>
-    <p style="color:#ccc; font-size:0.8rem; margin-top:0.5rem">Pulsa para abrir en Instagram</p>
-  `;
-
+    <div class="modal-words profile-words" style="justify-content:center">${palabras.map(w=>`<span class="word-tag">${escapeHtml(w)}</span>`).join('')}</div>
+    <a href="https://instagram.com/${escapeHtml(igHandle.replace('@',''))}" target="_blank" class="modal-phone">📸 ${escapeHtml(igHandle)}</a>
+    <p style="color:#ccc;font-size:0.8rem;margin-top:0.5rem">Pulsa para abrir en Instagram</p>`;
   document.getElementById('modalOverlay').classList.add('open');
 }
 
-function closeModal(e) {
-  if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
-}
-
-function closeModalBtn() {
-  document.getElementById('modalOverlay').classList.remove('open');
-}
+function closeModal(e) { if(e.target===document.getElementById('modalOverlay')) closeModalBtn(); }
+function closeModalBtn() { document.getElementById('modalOverlay').classList.remove('open'); }
 
 // ─── TOAST ───
 function showToast(msg, color) {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  if (color) t.style.background = `linear-gradient(135deg, ${color}, #9b5d8a)`;
-  else t.style.background = 'linear-gradient(135deg, #e8527a, #9b5d8a)';
+  t.style.background = color ? `linear-gradient(135deg,${color},#9b5d8a)` : 'linear-gradient(135deg,#e8527a,#9b5d8a)';
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+  setTimeout(()=>t.classList.remove('show'), 2500);
 }
 
 // ─── BURST GLITTER ───
 function burstGlitter() {
-  const cx = window.innerWidth / 2;
-  const cy = window.innerHeight / 2;
-  for (let i = 0; i < 80; i++) particles.push(createParticle(cx + (Math.random()-0.5)*200, cy + (Math.random()-0.5)*200));
+  const cx = window.innerWidth/2, cy = window.innerHeight/2;
+  for(let i=0;i<80;i++) particles.push(createParticle(cx+(Math.random()-0.5)*200, cy+(Math.random()-0.5)*200));
 }
 
-// ─── UTILS ───
-function escapeHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+function escapeHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-// CSS for shake
 const style = document.createElement('style');
-style.textContent = `@keyframes shakeInput { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }`;
+style.textContent = `@keyframes shakeInput{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}`;
 document.head.appendChild(style);
 </script>
 </body>
